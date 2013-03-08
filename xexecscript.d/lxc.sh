@@ -27,10 +27,11 @@ cd lxc-${lxc_version}
 args=--disable-apparmor make rpm
 EOS
 
+# should install lxc-libs 1st
 chroot $1 $SHELL <<EOS
-rpm -ivh \
- /home/${devel_user}/rpmbuild/RPMS/*/lxc-${lxc_version}*.rpm \
- /home/${devel_user}/rpmbuild/RPMS/*/lxc-*-${lxc_version}*.rpm
+rpm -ivh /home/${devel_user}/rpmbuild/RPMS/*/lxc-libs-${lxc_version}*.rpm
+rpm -ivh /home/${devel_user}/rpmbuild/RPMS/*/lxc-devel-${lxc_version}*.rpm
+rpm -ivh /home/${devel_user}/rpmbuild/RPMS/*/lxc-${lxc_version}*.rpm
 EOS
 
 rsync -avx \
